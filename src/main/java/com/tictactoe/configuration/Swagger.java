@@ -1,8 +1,8 @@
 package com.tictactoe.configuration;
 
+import com.tictactoe.web.GameController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.tictactoe.web.GameController;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
