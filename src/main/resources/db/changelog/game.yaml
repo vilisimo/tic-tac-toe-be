@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: game-1
+      author: Simonas Viliunas
+      comment: Creates a 'Game' table
+      changes:
+        - createTable:
+            tableName: game
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false

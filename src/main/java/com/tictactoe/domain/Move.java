@@ -1,41 +1,47 @@
 package com.tictactoe.domain;
 
-import com.tictactoe.exceptions.InvalidMove;
-
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class Move {
 
-    private final Player player;
-    private final int square;
+    @Id
+    private int square;
+    private int x;
+    private int y;
 
-    /**
-     * Since squares are counted from 0, only [0-8] squares are valid
-     *
-     * @throws InvalidMove on invalid move
-     */
-    public Move(Player player, int square) {
-        if (square < 0 || square > 8) {
-            throw new InvalidMove("Squares can only be inside [0-8] range");
-        }
+    @Enumerated(EnumType.STRING)
+    private Player player;
 
-        this.player = player;
-        this.square = square;
+    private Move() { /* For (de-)serialization */ }
+
+    public int getSquare() {
+        return square;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public Player getPlayer() {
         return player;
     }
 
-    public int getSquare() {
-        return square;
-    }
-
     @Override
     public String toString() {
         return "Move{" +
-                "player=" + player +
-                ", square=" + square +
+                "square=" + square +
+                ", x=" + x +
+                ", y=" + y +
+                ", player=" + player +
                 '}';
     }
 
@@ -45,11 +51,13 @@ public class Move {
         if (o == null || getClass() != o.getClass()) return false;
         Move move = (Move) o;
         return square == move.square &&
+                x == move.x &&
+                y == move.y &&
                 player == move.player;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(player, square);
+        return Objects.hash(square, x, y, player);
     }
 }

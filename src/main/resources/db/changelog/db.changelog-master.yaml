@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: "game.yaml"
+  - include:
+      relativeToChangelogFile: true
+      file: "move.yaml"

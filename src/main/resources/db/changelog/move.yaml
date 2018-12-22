@@ -1,0 +1,37 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: move-1
+      author: Simonas Viliunas
+      comment: Creates a 'move' table
+      changes:
+        - createTable:
+            tableName: move
+            columns:
+              - column:
+                  name: square
+                  type: tinyint(1)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: game_id
+                  type: varchar(36)
+                  constraints:
+                    references: game(id)
+                    foreignKeyName: fk_move_game
+              - column:
+                  name: x
+                  type: tinyint(1)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: y
+                  type: tinyint(1)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: player
+                  type: char
+                  constraints:
+                    nullable: false
