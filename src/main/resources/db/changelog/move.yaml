@@ -10,7 +10,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: square
-                  type: tinyint(1)
+                  type: tinyint(1) unsigned
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -22,12 +22,12 @@ databaseChangeLog:
                     foreignKeyName: fk_move_game
               - column:
                   name: x
-                  type: tinyint(1)
+                  type: tinyint(1) unsigned
                   constraints:
                     nullable: false
               - column:
                   name: y
-                  type: tinyint(1)
+                  type: tinyint(1) unsigned
                   constraints:
                     nullable: false
               - column:
