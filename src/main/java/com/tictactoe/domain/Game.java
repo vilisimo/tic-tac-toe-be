@@ -6,9 +6,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 public class Game {
@@ -18,8 +18,7 @@ public class Game {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "game_id")
-    // TODO: use list instead of set to maintain order?
-    private Set<Move> moves = new HashSet<>();
+    private List<Move> moves = new ArrayList<>();
 
     private Game() { /* For (de-)serialization */ }
 
@@ -31,7 +30,7 @@ public class Game {
         return id;
     }
 
-    public Set<Move> getMoves() {
+    public List<Move> getMoves() {
         return moves;
     }
 
