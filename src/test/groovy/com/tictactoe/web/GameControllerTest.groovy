@@ -44,5 +44,17 @@ class GameControllerTest {
         //then
         verify(games).save(any(Game))
     }
+
+    @Test
+    void "delegates retrieving a game to downstream service"() {
+        //given
+        def id = UUID.randomUUID().toString()
+
+        //when
+        controller.getGame(id)
+
+        //then
+        verify(games).find(id)
+    }
 }
 

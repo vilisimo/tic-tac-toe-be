@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,11 +30,6 @@ public class GameController {
         this.games = games;
     }
 
-    @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity getGame() {
-        return ResponseEntity.ok(null);
-    }
-
     @PostMapping(produces = APPLICATION_JSON_VALUE)
     public ResponseEntity saveGame(@RequestBody @Valid GameRequest game) {
         // TODO: validate ID, etc
@@ -43,5 +39,13 @@ public class GameController {
         games.save(newGame);
 
         return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @GetMapping(produces = APPLICATION_JSON_VALUE, path = "{id}")
+    public ResponseEntity<Game> getGame(@PathVariable String id) {
+        logger.debug("Retrieving a game[id={}]", id);
+        return games.find(id)
+                .map(game -> new ResponseEntity<>(game, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
