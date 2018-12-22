@@ -1,7 +1,5 @@
 package com.tictactoe.web.request;
 
-import com.tictactoe.domain.Player;
-
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 

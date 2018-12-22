@@ -3,6 +3,8 @@ package com.tictactoe.service
 import com.tictactoe.domain.Game
 import com.tictactoe.domain.Move
 import com.tictactoe.domain.Player
+import com.tictactoe.exceptions.DuplicateMoveException
+import com.tictactoe.exceptions.FinishedGameException
 import com.tictactoe.exceptions.GameDoesNotExist
 import com.tictactoe.repository.GameRepository
 import org.junit.Before
@@ -12,9 +14,7 @@ import org.mockito.ArgumentCaptor
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
-import static org.mockito.Mockito.mock
-import static org.mockito.Mockito.verify
-import static org.mockito.Mockito.when
+import static org.mockito.Mockito.*
 
 @RunWith(MockitoJUnitRunner)
 class GameServiceTest {
@@ -97,5 +97,50 @@ class GameServiceTest {
 
         //when
         service.makeMove(id, mock(Move))
+    }
+
+    @Test(expected = FinishedGameException)
+    void "informs that the game has ended when the flag is set"() {
+        //given
+        def id = UUID.randomUUID().toString()
+        def game = mock(Game)
+
+        when(game.finished).thenReturn(true)
+        when(game.moves).thenReturn([])
+        when(repository.findById(id)).thenReturn(Optional.of(game))
+
+        //when
+        service.makeMove(id, mock(Move))
+    }
+
+    @Test(expected = FinishedGameException)
+    void "informs that the game has ended when all the moves have been made"() {
+        //given
+        def id = UUID.randomUUID().toString()
+        def game = mock(Game)
+        def moves = mock(List)
+
+        when(game.finished).thenReturn(false)
+        when(game.moves).thenReturn(moves)
+        when(moves.size()).thenReturn(9)
+        when(repository.findById(id)).thenReturn(Optional.of(game))
+
+        //when
+        service.makeMove(id, mock(Move))
+    }
+
+    @Test(expected = DuplicateMoveException)
+    void "informs that a duplicate move was attempted"() {
+        //given
+        def id = UUID.randomUUID().toString()
+        def game = mock(Game)
+        def moves = [new Move(0, 1, 1, Player.X)]
+
+        when(game.finished).thenReturn(false)
+        when(game.moves).thenReturn(moves)
+        when(repository.findById(id)).thenReturn(Optional.of(game))
+
+        //when
+        service.makeMove(id, new Move(0, 1, 1, Player.O))
     }
 }

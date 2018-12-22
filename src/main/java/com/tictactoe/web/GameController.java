@@ -35,7 +35,6 @@ public class GameController {
 
     @PostMapping
     public ResponseEntity saveGame(@RequestBody @Valid GameRequest game) {
-        // TODO: validate ID, etc
         logger.debug("Received a request to save a game[id={}]", game.getId());
 
         Game newGame = new Game(game.getId());
