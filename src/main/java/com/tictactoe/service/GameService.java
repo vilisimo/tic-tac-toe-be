@@ -35,7 +35,7 @@ public class GameService {
         //  1) a square hasn't been marked
         //  2) there aren't more than 9 moves already
         logger.debug("Retrieving a game[id={}] to save a move", id);
-        Game game = find(id).orElseThrow(() -> new GameDoesNotExist("Game with id=" + id + " could not be found"));
+        Game game = find(id).orElseThrow(() -> new GameDoesNotExist("Game[id=" + id + "] could not be found"));
         game.getMoves().add(move);
         save(game);
         logger.debug("Successfully saved a move[{}] to a game[id={}]", move, id);
