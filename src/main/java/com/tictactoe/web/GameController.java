@@ -1,8 +1,11 @@
 package com.tictactoe.web;
 
 import com.tictactoe.domain.Game;
+import com.tictactoe.domain.Move;
+import com.tictactoe.domain.Player;
 import com.tictactoe.service.GameService;
 import com.tictactoe.web.request.GameRequest;
+import com.tictactoe.web.request.MoveRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -30,7 +33,7 @@ public class GameController {
         this.games = games;
     }
 
-    @PostMapping(produces = APPLICATION_JSON_VALUE)
+    @PostMapping
     public ResponseEntity saveGame(@RequestBody @Valid GameRequest game) {
         // TODO: validate ID, etc
         logger.debug("Received a request to save a game[id={}]", game.getId());
@@ -47,5 +50,14 @@ public class GameController {
         return games.find(id)
                 .map(game -> new ResponseEntity<>(game, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PostMapping(path = "{id}/moves")
+    public ResponseEntity makeMove(@PathVariable String id, @RequestBody @Valid MoveRequest move) {
+        logger.debug("Received a move request for a game[id={}]", id);
+
+        games.makeMove(id, new Move(move.getSquare(), move.getX(), move.getY(), Player.from(move.getPlayer())));
+
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }

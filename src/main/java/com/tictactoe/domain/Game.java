@@ -18,6 +18,7 @@ public class Game {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "game_id")
+    // TODO: use list instead of set to maintain order?
     private Set<Move> moves = new HashSet<>();
 
     private Game() { /* For (de-)serialization */ }

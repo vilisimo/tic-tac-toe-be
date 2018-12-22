@@ -19,6 +19,13 @@ public class Move {
 
     private Move() { /* For (de-)serialization */ }
 
+    public Move(int square, int x, int y, Player player) {
+        this.square = square;
+        this.x = x;
+        this.y = y;
+        this.player = player;
+    }
+
     public int getSquare() {
         return square;
     }
