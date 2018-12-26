@@ -4,8 +4,8 @@ import com.tictactoe.domain.Game;
 import com.tictactoe.domain.Move;
 import com.tictactoe.domain.Player;
 import com.tictactoe.service.GameService;
-import com.tictactoe.web.request.GameRequest;
 import com.tictactoe.web.request.MoveRequest;
+import com.tictactoe.web.response.NewGameResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -33,14 +34,15 @@ public class GameController {
         this.games = games;
     }
 
-    @PostMapping
-    public ResponseEntity saveGame(@RequestBody @Valid GameRequest game) {
-        logger.debug("Received a request to save a game[id={}]", game.getId());
+    @PostMapping(produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<NewGameResponse> newGame() {
+        String gameId = UUID.randomUUID().toString();
+        logger.debug("Initializing a new game[id={}]", gameId);
 
-        Game newGame = new Game(game.getId());
+        Game newGame = new Game(gameId);
         games.save(newGame);
 
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<>(new NewGameResponse(gameId), HttpStatus.CREATED);
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE, path = "{id}")

@@ -4,8 +4,8 @@ import com.tictactoe.domain.Game
 import com.tictactoe.domain.Move
 import com.tictactoe.domain.Player
 import com.tictactoe.service.GameService
-import com.tictactoe.web.request.GameRequest
 import com.tictactoe.web.request.MoveRequest
+import com.tictactoe.web.response.NewGameResponse
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,7 +32,7 @@ class GameControllerTest {
     @Test
     void "returns 201 upon saving a game"() {
         //when
-        def response = controller.saveGame(new GameRequest(id: UUID.randomUUID().toString()))
+        def response = controller.newGame()
 
         //then
         assert response
@@ -40,9 +40,20 @@ class GameControllerTest {
     }
 
     @Test
+    void "assigns uuid to a game"() {
+        //when
+        def response = controller.newGame()
+
+        //then
+        assert response
+        assert response.body instanceof NewGameResponse
+        assert UUID.fromString(response.body.getId())
+    }
+
+    @Test
     void "delegates saving to downstream service"() {
         //when
-        controller.saveGame(new GameRequest(id: UUID.randomUUID().toString()))
+        controller.newGame()
 
         //then
         verify(games).save(any(Game))
