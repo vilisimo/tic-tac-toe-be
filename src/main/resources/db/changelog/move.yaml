@@ -9,11 +9,15 @@ databaseChangeLog:
             tableName: move
             columns:
               - column:
-                  name: square
-                  type: tinyint(1) unsigned
+                  name: id
+                  type: int unsigned
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
+              - column:
+                  name: square
+                  type: tinyint(1) unsigned
               - column:
                   name: game_id
                   type: varchar(36)

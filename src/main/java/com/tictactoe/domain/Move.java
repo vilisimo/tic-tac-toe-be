@@ -3,6 +3,8 @@ package com.tictactoe.domain;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
@@ -10,6 +12,9 @@ import java.util.Objects;
 public class Move {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private int square;
     private int x;
     private int y;
@@ -45,7 +50,8 @@ public class Move {
     @Override
     public String toString() {
         return "Move{" +
-                "square=" + square +
+                "id=" + id +
+                ", square=" + square +
                 ", x=" + x +
                 ", y=" + y +
                 ", player=" + player +
@@ -60,11 +66,12 @@ public class Move {
         return square == move.square &&
                 x == move.x &&
                 y == move.y &&
+                Objects.equals(id, move.id) &&
                 player == move.player;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(square, x, y, player);
+        return Objects.hash(id, square, x, y, player);
     }
 }
