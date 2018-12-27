@@ -17,6 +17,7 @@ import java.util.Optional;
 public class GameService {
 
     private static final Logger logger = LoggerFactory.getLogger(GameService.class);
+    private static final int MAX_MOVES = 9;
 
     private final GameRepository games;
 
@@ -47,7 +48,7 @@ public class GameService {
     }
 
     private void checkWon(Game game) {
-        if (game.isFinished() || game.getMoves().size() >= 9) {
+        if (game.getMoves().size() >= MAX_MOVES) {
             logger.error("An attempt to add a move to an ended game[id={}] was made", game);
             throw new FinishedGameException("Game[id=" + game.getId() + "] has already ended");
         }

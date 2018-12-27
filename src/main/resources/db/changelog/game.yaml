@@ -13,9 +13,3 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-              - column:
-                  name: finished
-                  type: boolean
-                  defaultValue: false
-                  constraints:
-                    nullable: false

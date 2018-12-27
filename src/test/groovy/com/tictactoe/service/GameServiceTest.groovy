@@ -100,27 +100,12 @@ class GameServiceTest {
     }
 
     @Test(expected = FinishedGameException)
-    void "informs that the game has ended when the flag is set"() {
-        //given
-        def id = UUID.randomUUID().toString()
-        def game = mock(Game)
-
-        when(game.finished).thenReturn(true)
-        when(game.moves).thenReturn([])
-        when(repository.findById(id)).thenReturn(Optional.of(game))
-
-        //when
-        service.makeMove(id, mock(Move))
-    }
-
-    @Test(expected = FinishedGameException)
     void "informs that the game has ended when all the moves have been made"() {
         //given
         def id = UUID.randomUUID().toString()
         def game = mock(Game)
         def moves = mock(List)
 
-        when(game.finished).thenReturn(false)
         when(game.moves).thenReturn(moves)
         when(moves.size()).thenReturn(9)
         when(repository.findById(id)).thenReturn(Optional.of(game))
@@ -136,7 +121,7 @@ class GameServiceTest {
         def game = mock(Game)
         def moves = [new Move(0, 1, 1, Player.X)]
 
-        when(game.finished).thenReturn(false)
+
         when(game.moves).thenReturn(moves)
         when(repository.findById(id)).thenReturn(Optional.of(game))
 

@@ -17,8 +17,6 @@ public class Game {
     @Id
     private String id;
 
-    private boolean finished;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "game_id")
     @OrderBy("id ASC")
@@ -32,10 +30,6 @@ public class Game {
 
     public String getId() {
         return id;
-    }
-
-    public boolean isFinished() {
-        return finished;
     }
 
     public List<Move> getMoves() {
