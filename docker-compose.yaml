@@ -11,7 +11,7 @@ services:
       MYSQL_PASSWORD: mysqlpw
       MYSQL_ROOT_HOST: '%'
 
-  ttt:
+  backend:
     image: tictactoe:1.0.0
     ports:
       - 8080:8080
