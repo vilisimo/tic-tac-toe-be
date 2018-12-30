@@ -3,16 +3,12 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/tictactoe?useUnicode=true&characterEncoding=utf8&createDatabaseIfNotExist=true
+    url: jdbc:mysql://mysql:3306/tictactoe?useUnicode=true&characterEncoding=utf8&createDatabaseIfNotExist=true
     username: root
     password: rootpassword
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       initialization-fail-timeout: 0
-
----
-spring:
-  profiles: dev
 
 logging:
   level:

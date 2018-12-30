@@ -10,3 +10,11 @@ services:
       MYSQL_USER: mysqluser
       MYSQL_PASSWORD: mysqlpw
       MYSQL_ROOT_HOST: '%'
+
+  ttt:
+    image: tictactoe:1.0.0
+    ports:
+      - 8080:8080
+    restart: on-failure
+    depends_on:
+      - mysql
