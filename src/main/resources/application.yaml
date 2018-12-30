@@ -7,6 +7,8 @@ spring:
     username: root
     password: rootpassword
     driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      initialization-fail-timeout: 0
 
 ---
 spring:
