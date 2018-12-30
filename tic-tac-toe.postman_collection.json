@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "b6543a0c-19de-4374-8911-399375e194ab",
+		"name": "tic-tac-toe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Game",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/games/{{gameId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"games",
+						"{{gameId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Game",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/games/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"games",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Move",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"x\": 1,\n\t\"y\": 2,\n\t\"square\": 3,\n\t\"player\": \"X\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/games/{{gameId}}/moves",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"games",
+						"{{gameId}}",
+						"moves"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
