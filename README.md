@@ -29,8 +29,8 @@ docker-compose up -d mysql
 Note, however, that with the latter method you will need to do either of the
 steps:
  
-1. Configure your machine to resolve `mysql` to `127.0.01`
-2. Overwrite via `spring.datasource.url` environment variable.
+1. Configure your machine to resolve `mysql` to `127.0.0.1`
+2. Overwrite it via `spring.datasource.url` environment variable.
 3. Edit the [`application.yaml`](https://github.com/vilisimo/tic-tac-toe-be/blob/master/src/main/resources/application.yaml)
 to have
 
